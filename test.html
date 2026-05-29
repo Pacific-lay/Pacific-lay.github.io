@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Your Name — Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #1a1a1a;
+      --gray: #6b6b6b;
+      --light: #f5f4f0;
+      --border: #e0deda;
+      --white: #ffffff;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      color: var(--black);
+      background: var(--white);
+      line-height: 1.7;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 3rem;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+    }
+
+    .nav-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.01em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--gray);
+      font-size: 0.875rem;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--black); }
+
+    /* SECTIONS */
+    section {
+      padding: 6rem 3rem;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    /* HERO */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-top: 8rem;
+    }
+
+    .hero-label {
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(3rem, 8vw, 5.5rem);
+      line-height: 1.05;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-bio {
+      font-size: 1.15rem;
+      color: var(--gray);
+      max-width: 480px;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-links {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.65rem 1.5rem;
+      border: 1px solid var(--black);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      color: var(--black);
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .btn:hover { background: var(--black); color: var(--white); }
+
+    .btn-filled {
+      background: var(--black);
+      color: var(--white);
+    }
+
+    .btn-filled:hover { background: #333; }
+
+    /* DIVIDER */
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    /* SECTION LABELS */
+    .section-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 3rem;
+    }
+
+    /* ABOUT */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .about-text p {
+      color: var(--gray);
+      margin-bottom: 1rem;
+      font-size: 1rem;
+    }
+
+    .skills-list {
+      list-style: none;
+    }
+
+    .skills-list li {
+      padding: 0.6rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.9rem;
+      color: var(--gray);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .skills-list li span {
+      color: var(--black);
+      font-weight: 400;
+    }
+
+    /* PROJECTS */
+    .projects-grid {
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      border: 1px solid var(--border);
+      padding: 2rem;
+      transition: border-color 0.2s;
+    }
+
+    .project-card:hover { border-color: var(--black); }
+
+    .project-tag {
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 0.75rem;
+    }
+
+    .project-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.4rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .project-desc {
+      color: var(--gray);
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .project-links {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .project-link {
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--black);
+      text-decoration: none;
+      border-bottom: 1px solid var(--black);
+      padding-bottom: 1px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .project-link:hover { color: var(--gray); border-color: var(--gray); }
+
+    /* CV */
+    .cv-entry {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 2rem;
+      padding: 1.75rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .cv-year {
+      font-size: 0.8rem;
+      color: var(--gray);
+      letter-spacing: 0.05em;
+      padding-top: 0.2rem;
+    }
+
+    .cv-role {
+      font-weight: 500;
+      font-size: 1rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .cv-place {
+      font-size: 0.875rem;
+      color: var(--gray);
+      margin-bottom: 0.5rem;
+    }
+
+    .cv-detail {
+      font-size: 0.875rem;
+      color: var(--gray);
+    }
+
+    /* CONTACT */
+    .contact-intro {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      line-height: 1.2;
+      margin-bottom: 2rem;
+      max-width: 500px;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .contact-link {
+      text-decoration: none;
+      color: var(--gray);
+      font-size: 1rem;
+      border-bottom: 1px solid transparent;
+      display: inline-block;
+      transition: color 0.2s, border-color 0.2s;
+      padding-bottom: 1px;
+    }
+
+    .contact-link:hover { color: var(--black); border-color: var(--black); }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.8rem;
+      color: var(--gray);
+      border-top: 1px solid var(--border);
+    }
+
+    /* FADE IN */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-label, .hero-name, .hero-bio, .hero-links {
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards;
+    }
+    .hero-label { animation-delay: 0.1s; }
+    .hero-name  { animation-delay: 0.25s; }
+    .hero-bio   { animation-delay: 0.4s; }
+    .hero-links { animation-delay: 0.55s; }
+
+    @media (max-width: 640px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { gap: 1.25rem; }
+      section { padding: 4rem 1.5rem; }
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .cv-entry { grid-template-columns: 1fr; gap: 0.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-name">Your Name</div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#cv">CV</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <p class="hero-label">CS Student &amp; Developer</p>
+    <h1 class="hero-name">Your<br>Name.</h1>
+    <p class="hero-bio">I build things with code. Currently studying Computer Science and working on projects that matter to me.</p>
+    <div class="hero-links">
+      <a href="#projects" class="btn btn-filled">View Projects</a>
+      <a href="#cv" class="btn">Download CV</a>
+    </div>
+  </section>
+
+  <hr class="divider"/>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <p class="section-label">About</p>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>Hi, I'm [Your Name]. I'm a Computer Science student passionate about building things — from small scripts to full applications.</p>
+        <p>I'm currently in my [year] year, studying at [University]. I enjoy problem solving, learning new technologies, and turning ideas into working software.</p>
+        <p>When I'm not coding, I'm [your hobby or interest].</p>
+      </div>
+      <div>
+        <ul class="skills-list">
+          <li><span>Python</span> Intermediate</li>
+          <li><span>Java</span> Intermediate</li>
+          <li><span>HTML / CSS</span> Learning</li>
+          <li><span>JavaScript</span> Learning</li>
+          <li><span>Git</span> Familiar</li>
+          <li><span>Your skill</span> Level</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider"/>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <p class="section-label">Projects</p>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <p class="project-tag">Python · Game</p>
+        <h2 class="project-title">Snake Game</h2>
+        <p class="project-desc">A classic Snake game built in Python. Includes score tracking, increasing speed, and game-over detection.</p>
+        <div class="project-links">
+          <a href="#" class="project-link">GitHub →</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <p class="project-tag">Java · Your Tag</p>
+        <h2 class="project-title">Project Two</h2>
+        <p class="project-desc">Describe your second project here. What does it do? What did you learn from building it?</p>
+        <div class="project-links">
+          <a href="#" class="project-link">GitHub →</a>
+          <a href="#" class="project-link">Live Demo →</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <p class="project-tag">Your Stack</p>
+        <h2 class="project-title">Project Three</h2>
+        <p class="project-desc">Add more projects as you build them. Each card is easy to copy and fill in with new content.</p>
+        <div class="project-links">
+          <a href="#" class="project-link">GitHub →</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="divider"/>
+
+  <!-- CV -->
+  <section id="cv">
+    <p class="section-label">CV</p>
+
+    <div class="cv-entry">
+      <p class="cv-year">2022 — Present</p>
+      <div>
+        <p class="cv-role">BSc Computer Science</p>
+        <p class="cv-place">Your University Name</p>
+        <p class="cv-detail">Relevant modules: Data Structures, Algorithms, Object-Oriented Programming, Databases.</p>
+      </div>
+    </div>
+
+    <div class="cv-entry">
+      <p class="cv-year">2024</p>
+      <div>
+        <p class="cv-role">Your Role or Project</p>
+        <p class="cv-place">Company / Organisation / Personal</p>
+        <p class="cv-detail">Describe what you did here — internship, part-time job, volunteer work, or a significant project.</p>
+      </div>
+    </div>
+
+    <div class="cv-entry">
+      <p class="cv-year">2023</p>
+      <div>
+        <p class="cv-role">Another Entry</p>
+        <p class="cv-place">Where</p>
+        <p class="cv-detail">Keep adding entries as your experience grows. Newest first.</p>
+      </div>
+    </div>
+
+    <br>
+    <a href="#" class="btn">Download Full CV (PDF)</a>
+  </section>
+
+  <hr class="divider"/>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <p class="section-label">Contact</p>
+    <p class="contact-intro">Want to work together or just say hi?</p>
+    <div class="contact-links">
+      <a href="mailto:you@email.com" class="contact-link">you@email.com</a>
+      <a href="https://github.com/yourusername" class="contact-link" target="_blank">GitHub</a>
+      <a href="https://linkedin.com/in/yourname" class="contact-link" target="_blank">LinkedIn</a>
+    </div>
+  </section>
+
+  <footer>
+    <p>Built by Your Name · 2025</p>
+  </footer>
+
+</body>
+</html>
