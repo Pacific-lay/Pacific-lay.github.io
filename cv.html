@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CV — Your Name</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #1a1a1a;
+      --gray: #6b6b6b;
+      --border: #e0deda;
+      --white: #ffffff;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      color: var(--black);
+      background: var(--white);
+      line-height: 1.7;
+    }
+
+    /* ============================================================
+       NAVIGATION BAR — identical on every page
+    ============================================================ */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 3rem;
+      border-bottom: 1px solid var(--border);
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(8px);
+      z-index: 100;
+    }
+
+    .nav-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.1rem;
+      text-decoration: none;
+      color: var(--black);
+    }
+
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--gray);
+      font-size: 0.8rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--black); }
+    .nav-links a.active { color: var(--black); border-bottom: 1px solid var(--black); padding-bottom: 2px; }
+
+    /* ============================================================
+       PAGE WRAPPER
+    ============================================================ */
+    .page {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 8rem 3rem 6rem;
+    }
+
+    /* ============================================================
+       PAGE HEADER — change title and subtitle in the HTML below
+    ============================================================ */
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 4rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .page-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 1rem;
+    }
+
+    .page-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      line-height: 1.1;
+    }
+
+    /* ============================================================
+       DOWNLOAD BUTTON — links to your CV PDF file
+       Change href="cv.pdf" to match your actual PDF filename
+       Make sure cv.pdf is in the same folder as this HTML file
+    ============================================================ */
+    .btn {
+      display: inline-block;
+      padding: 0.65rem 1.5rem;
+      border: 1px solid var(--black);
+      text-decoration: none;
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--black);
+      transition: background 0.2s, color 0.2s;
+      white-space: nowrap;
+    }
+
+    .btn:hover { background: var(--black); color: var(--white); }
+
+    /* ============================================================
+       CV SECTIONS — Education, Experience, Skills etc.
+       Each section has a heading and entries below it.
+       To add a new section: copy a <div class="cv-section"> block
+    ============================================================ */
+    .cv-section {
+      margin-bottom: 3.5rem;
+    }
+
+    .cv-section-title {
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 1.5rem;
+    }
+
+    /* ============================================================
+       CV ENTRY — each row in the CV (one job, one degree, etc.)
+       To add a new entry: copy a <div class="cv-entry"> block
+       and fill in the year, role, place, and detail text
+    ============================================================ */
+    .cv-entry {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 2rem;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .cv-entry:first-of-type { border-top: 1px solid var(--border); }
+
+    .cv-year {
+      font-size: 0.8rem;
+      color: var(--gray);
+      padding-top: 0.15rem;
+    }
+
+    .cv-role {
+      font-weight: 500;
+      font-size: 1rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .cv-place {
+      font-size: 0.875rem;
+      color: var(--gray);
+      margin-bottom: 0.5rem;
+    }
+
+    .cv-detail {
+      font-size: 0.875rem;
+      color: var(--gray);
+    }
+
+    /* ============================================================
+       SKILLS GRID — the two-column skills list
+       To add a skill: copy a <div class="skill-item"> and change text
+    ============================================================ */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .skill-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.875rem;
+    }
+
+    .skill-item:nth-child(odd) { padding-right: 2rem; }
+    .skill-item:nth-child(even) { padding-left: 2rem; border-left: 1px solid var(--border); }
+
+    .skill-name { color: var(--black); }
+    .skill-level { color: var(--gray); font-size: 0.8rem; }
+
+    footer {
+      text-align: center;
+      padding: 3rem 0 2rem;
+      font-size: 0.75rem;
+      color: var(--gray);
+      border-top: 1px solid var(--border);
+      margin-top: 4rem;
+    }
+
+    @media (max-width: 640px) {
+      nav { padding: 1rem 1.5rem; }
+      .page { padding: 6rem 1.5rem 4rem; }
+      .cv-entry { grid-template-columns: 1fr; gap: 0.25rem; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .skill-item:nth-child(even) { padding-left: 0; border-left: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       NAVIGATION BAR — active page is "cv"
+  ============================================================ -->
+  <nav>
+    <a href="index.html" class="nav-name">Your Name</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="cv.html" class="active">CV</a></li>       <!-- ← active on this page -->
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="archive.html">Archive</a></li>
+    </ul>
+  </nav>
+
+  <div class="page">
+
+    <!-- ============================================================
+         PAGE HEADER
+         Change the title text and the href on the download button
+    ============================================================ -->
+    <div class="page-header">
+      <div>
+        <p class="page-label">Background</p>
+        <h1 class="page-title">CV</h1>
+      </div>
+      <!-- ← change cv.pdf to your actual PDF filename when you have one -->
+      <a href="cv.pdf" download class="btn">Download PDF</a>
+    </div>
+
+    <!-- ============================================================
+         EDUCATION SECTION
+         Add or remove cv-entry blocks below to match your education
+    ============================================================ -->
+    <div class="cv-section">
+      <p class="cv-section-title">Education</p>
+
+      <!-- EDUCATION ENTRY 1 — replace with your real university details -->
+      <div class="cv-entry">
+        <p class="cv-year">2022 — Present</p>          <!-- ← your start year and end year or "Present" -->
+        <div>
+          <p class="cv-role">BSc Computer Science</p>  <!-- ← your degree -->
+          <p class="cv-place">Your University Name</p> <!-- ← your university -->
+          <p class="cv-detail">
+            Relevant modules: Data Structures, Algorithms, Object-Oriented Programming, Databases.
+                                                        <!-- ← your relevant modules -->
+          </p>
+        </div>
+      </div>
+
+      <!-- EDUCATION ENTRY 2 — your secondary school or other qualification -->
+      <div class="cv-entry">
+        <p class="cv-year">2020 — 2022</p>
+        <div>
+          <p class="cv-role">A-Levels / Diploma</p>    <!-- ← your qualification -->
+          <p class="cv-place">Your School Name</p>     <!-- ← your school -->
+          <p class="cv-detail">Subjects: Mathematics, Computer Science, Physics.</p>
+        </div>
+      </div>
+
+    </div><!-- end education -->
+
+    <!-- ============================================================
+         EXPERIENCE SECTION
+         Add internships, part-time jobs, volunteer work here.
+         If you have none yet, you can delete this whole section
+         and add it back when you have something to put in.
+    ============================================================ -->
+    <div class="cv-section">
+      <p class="cv-section-title">Experience</p>
+
+      <!-- EXPERIENCE ENTRY 1 — replace or delete if no experience yet -->
+      <div class="cv-entry">
+        <p class="cv-year">2024</p>
+        <div>
+          <p class="cv-role">Your Role Title</p>                <!-- ← job title -->
+          <p class="cv-place">Company or Organisation</p>       <!-- ← where you worked -->
+          <p class="cv-detail">
+            Describe what you did here. What did you build, learn, or contribute?
+            Even small experiences count — hackathons, freelance, volunteering.
+                                                                <!-- ← what you did -->
+          </p>
+        </div>
+      </div>
+
+      <!-- EXPERIENCE ENTRY 2 — add more entries by copying the block above -->
+      <div class="cv-entry">
+        <p class="cv-year">2023</p>
+        <div>
+          <p class="cv-role">Another Role</p>
+          <p class="cv-place">Another Place</p>
+          <p class="cv-detail">What you did here.</p>
+        </div>
+      </div>
+
+    </div><!-- end experience -->
+
+    <!-- ============================================================
+         SKILLS SECTION
+         Add or remove skill-item blocks to match your real skills.
+         skill-level can be: Proficient, Intermediate, Familiar, Learning
+    ============================================================ -->
+    <div class="cv-section">
+      <p class="cv-section-title">Skills</p>
+      <div class="skills-grid">
+        <!-- Each skill-item needs a name and a level -->
+        <!-- Copy and paste pairs of skill-items to add more -->
+        <div class="skill-item">
+          <span class="skill-name">Python</span>
+          <span class="skill-level">Intermediate</span>
+        </div>
+        <div class="skill-item">
+          <span class="skill-name">Java</span>
+          <span class="skill-level">Intermediate</span>
+        </div>
+        <div class="skill-item">
+          <span class="skill-name">HTML / CSS</span>
+          <span class="skill-level">Learning</span>
+        </div>
+        <div class="skill-item">
+          <span class="skill-name">JavaScript</span>
+          <span class="skill-level">Learning</span>
+        </div>
+        <div class="skill-item">
+          <span class="skill-name">Git</span>
+          <span class="skill-level">Familiar</span>
+        </div>
+        <div class="skill-item">
+          <span class="skill-name">Your Skill</span>       <!-- ← add your skill here -->
+          <span class="skill-level">Level</span>
+        </div>
+      </div>
+    </div><!-- end skills -->
+
+    <footer>Built by Your Name · 2025</footer>
+
+  </div><!-- end page -->
+
+</body>
+</html>

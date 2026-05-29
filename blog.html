@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Blog — Your Name</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #1a1a1a;
+      --gray: #6b6b6b;
+      --border: #e0deda;
+      --white: #ffffff;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      color: var(--black);
+      background: var(--white);
+      line-height: 1.7;
+    }
+
+    /* ============================================================
+       NAVIGATION BAR — identical on every page
+    ============================================================ */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 3rem;
+      border-bottom: 1px solid var(--border);
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(8px);
+      z-index: 100;
+    }
+
+    .nav-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.1rem;
+      text-decoration: none;
+      color: var(--black);
+    }
+
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--gray);
+      font-size: 0.8rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--black); }
+    .nav-links a.active { color: var(--black); border-bottom: 1px solid var(--black); padding-bottom: 2px; }
+
+    .page {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 8rem 3rem 6rem;
+    }
+
+    /* ============================================================
+       PAGE HEADER — change title and subtitle in HTML below
+    ============================================================ */
+    .page-header {
+      margin-bottom: 4rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .page-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 1rem;
+    }
+
+    .page-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+
+    .page-subtitle { color: var(--gray); font-size: 1rem; }
+
+    /* ============================================================
+       BLOG POST ENTRIES — each row is one blog post
+       To add a new post: copy a <div class="post-entry"> block
+       and fill in the date, title, summary, and link.
+
+       HOW BLOG POSTS WORK:
+       Each post links to a separate HTML file (e.g. post-1.html).
+       Create a new .html file for each post you write.
+       A basic template is commented at the bottom of this file.
+    ============================================================ */
+    .posts-list {
+      display: grid;
+      gap: 0;
+    }
+
+    .post-entry {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 2rem;
+      padding: 2rem 0;
+      border-bottom: 1px solid var(--border);
+      text-decoration: none;
+      color: inherit;
+      transition: background 0.15s;
+    }
+
+    .post-entry:first-child { border-top: 1px solid var(--border); }
+    .post-entry:hover .post-title { text-decoration: underline; }
+
+    .post-date {
+      font-size: 0.8rem;
+      color: var(--gray);
+      padding-top: 0.2rem;
+    }
+
+    /* ============================================================
+       POST TITLE — the heading of each blog post in the list
+       Change font-size to make titles bigger or smaller
+    ============================================================ */
+    .post-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.25rem;
+      margin-bottom: 0.4rem;
+      line-height: 1.2;
+    }
+
+    .post-summary {
+      font-size: 0.875rem;
+      color: var(--gray);
+      margin-bottom: 0.75rem;
+    }
+
+    .post-tag {
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gray);
+      border: 1px solid var(--border);
+      padding: 0.2rem 0.5rem;
+      display: inline-block;
+    }
+
+    footer {
+      text-align: center;
+      padding: 3rem 0 2rem;
+      font-size: 0.75rem;
+      color: var(--gray);
+      border-top: 1px solid var(--border);
+      margin-top: 4rem;
+    }
+
+    @media (max-width: 640px) {
+      nav { padding: 1rem 1.5rem; }
+      .page { padding: 6rem 1.5rem 4rem; }
+      .post-entry { grid-template-columns: 1fr; gap: 0.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       NAVIGATION BAR — active page is "blog"
+  ============================================================ -->
+  <nav>
+    <a href="index.html" class="nav-name">Your Name</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="cv.html">CV</a></li>
+      <li><a href="blog.html" class="active">Blog</a></li>   <!-- ← active on this page -->
+      <li><a href="archive.html">Archive</a></li>
+    </ul>
+  </nav>
+
+  <div class="page">
+
+    <!-- ============================================================
+         PAGE HEADER — change title and subtitle text here
+    ============================================================ -->
+    <div class="page-header">
+      <p class="page-label">Writing</p>
+      <h1 class="page-title">Blog</h1>
+      <p class="page-subtitle">Notes, learnings, and thoughts on building things.</p>
+                                                              <!-- ← change this description -->
+    </div>
+
+    <!-- ============================================================
+         BLOG POST LIST
+         Each post-entry links to its own HTML file.
+         To add a new post:
+           1. Copy a post-entry block below
+           2. Change the href to a new filename e.g. "post-2.html"
+           3. Create that new file (copy the template at the bottom)
+           4. Fill in your post content in that new file
+    ============================================================ -->
+    <div class="posts-list">
+
+      <!-- BLOG POST 1 — replace with your real post -->
+      <a href="post-1.html" class="post-entry">
+        <span class="post-date">May 2025</span>               <!-- ← date of the post -->
+        <div>
+          <h2 class="post-title">How I Built My First Website</h2>
+                                                              <!-- ← your post title -->
+          <p class="post-summary">
+            A walkthrough of building this portfolio from scratch — what I learned
+            about HTML, CSS, and GitHub Pages along the way.   <!-- ← short summary -->
+          </p>
+          <span class="post-tag">Web</span>                   <!-- ← topic tag -->
+        </div>
+      </a>
+
+      <!-- BLOG POST 2 — demo placeholder, replace with real post -->
+      <a href="post-2.html" class="post-entry">
+        <span class="post-date">Apr 2025</span>
+        <div>
+          <h2 class="post-title">What I Learned Building Snake in Python</h2>
+          <p class="post-summary">
+            Lessons from my first real project — game loops, collision detection,
+            and why Pygame is a great starter library.
+          </p>
+          <span class="post-tag">Python</span>
+        </div>
+      </a>
+
+      <!-- BLOG POST 3 — demo placeholder, replace or delete -->
+      <a href="post-3.html" class="post-entry">
+        <span class="post-date">Mar 2025</span>
+        <div>
+          <h2 class="post-title">Post Title Goes Here</h2>
+          <p class="post-summary">
+            Write a one or two sentence summary of what this post is about.
+            Keep it short enough that people want to click to read more.
+          </p>
+          <span class="post-tag">Your Tag</span>
+        </div>
+      </a>
+
+    </div><!-- end posts-list -->
+
+    <footer>Built by Your Name · 2025</footer>
+
+  </div><!-- end page -->
+
+<!--
+  ================================================================
+  BLOG POST PAGE TEMPLATE
+  ================================================================
+  To create a new blog post, make a new file (e.g. post-1.html)
+  in the same folder and paste this template into it:
+
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Post Title — Your Name</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+    <style>
+      ...paste the same CSS from above...
+      .post-content { max-width: 640px; }
+      .post-content h2 { font-family: 'DM Serif Display', serif; font-size: 1.5rem; margin: 2rem 0 0.75rem; }
+      .post-content p  { color: var(--gray); margin-bottom: 1rem; font-size: 1rem; }
+      .post-content code { background: #f0eeea; padding: 0.1rem 0.4rem; font-size: 0.875rem; }
+    </style>
+  </head>
+  <body>
+    ...same nav...
+    <div class="page">
+      <div class="page-header">
+        <p class="page-label">May 2025 · Web</p>
+        <h1 class="page-title">How I Built My First Website</h1>
+      </div>
+      <div class="post-content">
+        <p>Your post content goes here...</p>
+        <h2>A subheading</h2>
+        <p>More content...</p>
+      </div>
+    </div>
+  </body>
+  </html>
+  ================================================================
+-->
+
+</body>
+</html>
